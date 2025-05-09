@@ -1,0 +1,34 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:DefaultConnection1",
+      "dynamicId": null
+    },
+    "mssql2": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:DefaultConnection2",
+      "dynamicId": null
+    },
+    "appInsights1": {
+      "type": "appInsights",
+      "dynamicId": null
+    },
+    "secrets1": {
+      "type": "secrets"
+    },
+    "mssql3": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:DefaultConnection3",
+      "dynamicId": null
+    },
+    "mssql4": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:DefaultConnection4",
+      "dynamicId": null
+    },
+    "apis1": {
+      "type": "apis"
+    }
+  }
+}
