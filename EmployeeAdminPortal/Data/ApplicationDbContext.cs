@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using EmployeeAdminPortal.Models.Entities; // Correct reference to your Employee class
+using EmployeeAdminPortal.Models.Entities;
 
 namespace EmployeeAdminPortal.Data
 {
@@ -11,8 +11,9 @@ namespace EmployeeAdminPortal.Data
         {
         }
 
-        public DbSet<ApiKey> ApiKeys { get; set; }
-
+        /*public DbSet<ApiKey> ApiKeys { get; set; }*/
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<ErrorLog> ErrorLogs { get; set; }
+
     }
 }

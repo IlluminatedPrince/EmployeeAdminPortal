@@ -1,89 +1,81 @@
 ﻿using EmployeeAdminPortal.Data;
 using EmployeeAdminPortal.Models;
 using EmployeeAdminPortal.Models.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeAdminPortal.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
+    [Authorize]
     public class EmployeesController : ControllerBase
     {
-        private readonly ApplicationDbContext dbContext;
+        private readonly ApplicationDbContext _context;
 
-        public EmployeesController(ApplicationDbContext dbContext)
+        public EmployeesController(ApplicationDbContext context)
         {
-            this.dbContext = dbContext;
+            _context = context;
         }
-
-        // GET: api/employees
+       
         [HttpGet]
-        public IActionResult GetAllEmployees()
+        public async Task<IActionResult> GetAll()
         {
-            var allEmployees = dbContext.Employees.ToList();
-            return Ok(allEmployees);
+            var employees = await _context.Employees.ToListAsync();
+            return Ok(employees);
         }
 
-        // GET: api/employees/{id}
-        [HttpGet("{id:guid}")]
-        public IActionResult GetEmployee(Guid id)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(int id)
         {
-            var employee = dbContext.Employees.Find(id);
-            if (employee == null)
+            var emp = await _context.Employees.FindAsync(id);
+            if (emp == null)
                 return NotFound();
-
-            return Ok(employee);
+            return Ok(emp);
         }
 
-        // POST: api/employees
         [HttpPost]
-        public IActionResult AddEmployee([FromBody] AddEmployeeDto addEmployeeDto)
+        public async Task<IActionResult> Add(AddEmployeeDto dto)
         {
-            var employeeEntity = new Employee
+            var emp = new Employee
             {
-                Id = Guid.NewGuid(),
-                Name = addEmployeeDto.Name,
-                email = addEmployeeDto.email,
-                phone = addEmployeeDto.phone,
-                salary = addEmployeeDto.salary
+                Name = dto.Name,
+                Email = dto.Email,
+                Phone = dto.Phone,
+                Salary = dto.Salary
             };
-
-            dbContext.Employees.Add(employeeEntity);
-            dbContext.SaveChanges();
-
-            return CreatedAtAction(nameof(GetEmployee), new { id = employeeEntity.Id }, employeeEntity);
+            _context.Employees.Add(emp);
+            await _context.SaveChangesAsync();
+            return CreatedAtAction(nameof(Get), new { id = emp.EmployeeID }, emp);
         }
 
-        // PUT: api/employees/{id}
-        [HttpPut("{id:guid}")]
-        public IActionResult UpdateEmployee(Guid id, [FromBody] UpdateEmployeeDto updateEmployeeDto)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, AddEmployeeDto dto)
         {
-            var employee = dbContext.Employees.Find(id);
-            if (employee == null)
+            var emp = await _context.Employees.FindAsync(id);
+            if (emp == null)
                 return NotFound();
 
-            employee.Name = updateEmployeeDto.Name;
-            employee.email = updateEmployeeDto.email;
-            employee.phone = updateEmployeeDto.phone;
-            employee.salary = updateEmployeeDto.salary;
+            emp.Name = dto.Name;
+            emp.Email = dto.Email;
+            emp.Phone = dto.Phone;
+            emp.Salary = dto.Salary;
 
-            dbContext.SaveChanges();
-            return Ok(employee);
+            await _context.SaveChangesAsync();
+            return Ok(emp);
         }
-        // DELETE: api/employees/{id}
-        [HttpDelete("{id:guid}")]
-        public IActionResult DeleteEmployee(Guid id)
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
         {
-            var employee = dbContext.Employees.Find(id);
-            if (employee == null)
+            var emp = await _context.Employees.FindAsync(id);
+            if (emp == null)
                 return NotFound();
 
-            dbContext.Employees.Remove(employee);
-            dbContext.SaveChanges();
-
-            return Ok(employee);
+            _context.Employees.Remove(emp);
+            await _context.SaveChangesAsync();
+            return NoContent();
         }
-
     }
 }

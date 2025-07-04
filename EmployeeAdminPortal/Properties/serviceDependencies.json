@@ -10,13 +10,6 @@
       "connectionId": "ConnectionStrings:DefaultConnection2",
       "dynamicId": null
     },
-    "appInsights1": {
-      "type": "appInsights",
-      "dynamicId": null
-    },
-    "secrets1": {
-      "type": "secrets"
-    },
     "mssql3": {
       "type": "mssql",
       "connectionId": "ConnectionStrings:DefaultConnection3",
@@ -25,6 +18,11 @@
     "mssql4": {
       "type": "mssql",
       "connectionId": "ConnectionStrings:DefaultConnection4",
+      "dynamicId": null
+    },
+    "appInsights1": {
+      "type": "appInsights",
+      "connectionId": "APPLICATIONINSIGHTS_CONNECTION_STRING",
       "dynamicId": null
     },
     "apis1": {

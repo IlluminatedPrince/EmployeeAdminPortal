@@ -1,4 +1,4 @@
-﻿namespace EmployeeAdminPortal.Models.Entities
+﻿/*namespace EmployeeAdminPortal.Models.Entities
 {
     public class ApiKey
     {
@@ -10,3 +10,4 @@
     }
 
 }
+*/

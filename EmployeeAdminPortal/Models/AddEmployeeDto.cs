@@ -1,11 +1,23 @@
-﻿namespace EmployeeAdminPortal.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace EmployeeAdminPortal.Models
 {
     public class AddEmployeeDto
     {
-        public Guid Id { get; set; }
-        public required string Name { get; set; }
-        public string email { get; set; }
-        public string? phone { get; set; }
-        public decimal salary { get; set; }
+        [Required]
+        [StringLength(100)]
+        public string Name { get; set; } = string.Empty;
+
+        [Required]
+        [EmailAddress]
+        [StringLength(100)]
+        public string Email { get; set; } = string.Empty;
+
+        [Phone]
+        [StringLength(20)]
+        public string? Phone { get; set; }
+
+        [Range(0, double.MaxValue)]
+        public decimal Salary { get; set; }
     }
 }
