@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JWT Auth Frontend</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <h1>JWT Auth Frontend</h1>
+
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Username" />
+    <input type="password" id="password" placeholder="Password" />
+    <button onclick="login()">Login</button>
+    <p id="loginStatus"></p>
+
+    <h2>Access Protected Resource</h2>
+    <button onclick="getSecureData()">Fetch Secure Data</button>
+    <p id="secureData"></p>
+
+    <button onclick="showTokenModal()">Enter Token Manually</button>
+    <button onclick="logout()">Logout</button>
+
+    <!-- Token Modal -->
+    <div id="tokenModal" class="modal">
+        <div id="modalContent">
+            <h3>Enter JWT Token</h3>
+            <textarea id="manualToken" rows="5" cols="60"></textarea><br />
+            <button onclick="useManualToken()">Use Token</button>
+            <button onclick="hideTokenModal()">Cancel</button>
+            <button onclick="hideTokenModal()">Cancel</button>
+            <button onclick="hideTokenModal()">Cancel</button>
+
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
